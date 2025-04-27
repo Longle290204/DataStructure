@@ -61,6 +61,31 @@ public class LinkedList {
         current.next = newNode;
     }
 
+    public void deleteNode(int value) {
+
+        if (head == null) {
+            System.out.println("List is empty. Cannot insert after " + value);
+            return;
+        }
+
+        if (head.value == value) { // Nếu Node đầu tiên cần xóa
+            head = head.next;
+            return;
+        }
+
+        Node current = head;
+        while (current.next != null && current.next.value != value) {
+            current = current.next;
+        }
+
+        if (current.next == null) {
+            System.out.println("Value " + value + " not found in the list.");
+            return;
+        }
+
+        current.next = current.next.next;
+    }
+
 
     public void printList() {
         Node current = head;
@@ -73,8 +98,6 @@ public class LinkedList {
         System.out.print("null");
     }
 
-
-
     public static void main(String[] args) {
         LinkedList list = new LinkedList();
 
@@ -83,13 +106,21 @@ public class LinkedList {
         list.addLast(4);
         list.addLast(5);
         list.addLast(6);
+        list.addMiddle(5, 10);
 
         list.addMiddle(8, 9);
+
+        list.deleteNode(4);
+        list.deleteNode(9);
+        list.deleteNode(10);
+        list.deleteNode(6);
+        list.deleteNode(3);
+
 
         list.printList();
     }
 }
-
+//8 -> 9 -> 4 -> 5 -> 10 -> 6 -> null
 //Ghi chú:
 
 //Add at first case:
@@ -106,3 +137,9 @@ public class LinkedList {
 //Case 1: head == null --> print: not found list
 //Case 2: current != null && current.value != afterValue
 //Case 3: current = null
+
+//Delete Node:
+//Condition:
+//Case 1: Delete head
+//Case 2: if empty
+//Case 3:
