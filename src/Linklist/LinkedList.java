@@ -38,7 +38,7 @@ public class LinkedList {
         head = newNode;
     }
 
-    public void addMiddle(int afterValue, int value ) {
+    public void addMiddle(int afterValue, int value) {
         Node newNode = new Node(value);
 
         if (head == null) {
@@ -104,4 +104,5 @@ public class LinkedList {
 //Add at middle case:
 //Condition:
 //Case 1: head == null --> print: not found list
-//Case2: current != null && current.value !=
+//Case 2: current != null && current.value != afterValue
+//Case 3: current = null
