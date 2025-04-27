@@ -105,4 +105,4 @@ public class LinkedList {
 //Condition:
 //Case 1: head == null --> print: not found list
 //Case 2: current != null && current.value != afterValue
-//Case 3:
+//Case 3: current = null
