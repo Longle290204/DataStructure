@@ -20,27 +20,43 @@ public class LOGOSYM {
                 }
             }
 
-            boolean isSym = true;
-            for (int j = 0; j < N; j++) {
+            // Symmetry X (horizontal axis)
+            boolean isSymX = true;
+            boolean isSymY = true;
+            for (int j = 0; j < N / 2; j++) {
                 for (int k = 0; k < N; k++) {
-                    if (matrix[j][k] != matrix[j][N - 1 - k]) {
-                        isSym = false;
-                        System.out.println("#" + i + " " + "NO");
-                        break;
-                    }
                     if (matrix[j][k] != matrix[N - 1 - j][k]) {
-                        isSym = false;
-                        System.out.println("#" + i + " " + "NO");
+                        isSymX = false;
                         break;
                     }
-                }
-                if (!isSym) {
-                    break;
                 }
             }
-            if (isSym) {
+
+            // Symmetry Y (vertical axis)
+            for (int j = 0; j < N; j++) {
+                for (int k = 0; k < N / 2; k++) {
+                    if (matrix[j][k] != matrix[j][N - 1 - k]) {
+                        isSymY = false;
+                        break;
+                    }
+                }
+            }
+
+            if (isSymX && isSymY) {
                 System.out.println("#" + i + " " + "YES");
+            }
+            else {
+                System.out.println("#" + i + " " + "NO");
+
             }
         }
     }
 }
+
+//This version:
+//
+//Minimizes comparisons to half the matrix.
+//
+//Avoids mixing logic.
+//
+//Only prints once at the end of the check.
