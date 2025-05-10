@@ -30,6 +30,9 @@ public class LOGOSYM {
                         break;
                     }
                 }
+                if (!isSymX) {
+                    break;
+                }
             }
 
             // Symmetry Y (vertical axis)
@@ -39,6 +42,9 @@ public class LOGOSYM {
                         isSymY = false;
                         break;
                     }
+                }
+                if(!isSymY) {
+                    break;
                 }
             }
 
