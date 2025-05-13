@@ -23,37 +23,37 @@ public class FindMatrix {
                 }
             }
 
+            int[][] prefix = new int[N + 1][N + 1];
+            for (int i = 1; i <= N; i++) {
+                for (int j = 1; j <= N; j++) {
+                    prefix[i][j] = matrix[i - 1][j - 1] + prefix[i - 1][j] + prefix[i][j - 1] - prefix[i - 1][j - 1];
+                }
+            }
+
             int minAlEqual = Integer.MAX_VALUE;
             int minSum = Integer.MAX_VALUE;
-            int resultInX = -1;
-            int resultInY = -1;
+            int resultInX = 0;
+            int resultInY = 0;
 
-            for (int i = 0; i <= N - M; i++) {
-                for (int j = 0; j <= N - M; j++) {
-                    int sum = 0;
-
-                    // Tính tổng ma trận con MxM bắt đầu tại (i, j)
-                    for (int x = 0; x < M; x++) {
-                        for (int y = 0; y < M; y++) {
-                            sum += matrix[i + x][j + y];
-                        }
-                    }
+            for (int i = 1; i <= N - M + 1; i++) {
+                for (int j = 1; j <= N - M + 1; j++) {
+                    int sum = prefix[i + M - 1][j + M - 1] - prefix[i - 1][j + M - 1] - prefix[i + M - 1][j - 1] + prefix[i - 1][j - 1];
 
                     int alEqual = Math.abs(sum - K);
 
                     if (alEqual < minAlEqual
                             || (alEqual == minAlEqual && sum < minSum)
-                            || (alEqual == minAlEqual && sum == minSum && i < resultInX)
-                            || (alEqual == minAlEqual && sum == minSum && i == resultInX && j < resultInY)) {
+                            || (alEqual == minAlEqual && sum == minSum && i - 1 < resultInX)
+                            || (alEqual == minAlEqual && sum == minSum && i - 1 == resultInX && j - 1 < resultInY)) {
                         minAlEqual = alEqual;
                         minSum = sum;
-                        resultInX = i;
-                        resultInY = j;
+                        resultInX = i - 1;
+                        resultInY = j - 1;
                     }
                 }
             }
 
-            System.out.println("#" + t + " " + resultInX + " " + resultInY);
+            System.out.println("#" + t + " " + (resultInX) + " " + (resultInY));
         }
     }
 }
