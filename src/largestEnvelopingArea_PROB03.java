@@ -19,31 +19,30 @@ public class largestEnvelopingArea_PROB03 {
             int[][] matrix = new int[M][N];
             for (int i = 0; i < M; i++) {
                 for (int j = 0; j < N; j++) {
-                    matrix[i][j] = sc.nextInt();
+                    int val = sc.nextInt();
+                    matrix[i][j] = (val % 2 == 0) ? val : 0;
                 }
             }
 
-            int max = 0;
-            int sum = 0;
+            int[][] prefix = new int[M + 1][N + 1];
+            for (int i = 1; i <= M; i++) {
+                for (int j = 1; j <= N; j++) {
+                    prefix[i][j] = matrix[i - 1][j - 1] + prefix[i - 1][j] + prefix[i][j - 1] - prefix[i - 1][j - 1];
+                }
+            }
+
+            int maxSum = 0;
             for (int i = 0; i <= M - H; i++) {
                 for (int j = 0; j <= N - W; j++) {
 
-                    for (int x = 0; x < H; x++) {
-                        for (int y = 0; y < W; y++) {
-                            if (matrix[x + i][y + j] % 2 == 0) {
-                                sum += matrix[x + i][y + j];
-                            }
-                        }
-                    }
+                    int sum = prefix[i + H][j + W] - prefix[i][j + W] - prefix[i + H][j] + prefix[i][j];
 
-                    if (sum > max) {
-                        max = sum;
+                    if (sum > maxSum) {
+                        maxSum = sum;
                     }
-
-                    sum = 0;
                 }
             }
-            System.out.println("#" + tc + " " + max);
+            System.out.println("#" + tc + " " + maxSum);
         }
     }
 }
