@@ -24,18 +24,20 @@ public class largestEnvelopingArea_PROB03 {
                 }
             }
 
-            int[][] prefix = new int[M + 1][N + 1];
-            for (int i = 1; i <= M; i++) {
-                for (int j = 1; j <= N; j++) {
-                    prefix[i][j] = matrix[i - 1][j - 1] + prefix[i - 1][j] + prefix[i][j - 1] - prefix[i - 1][j - 1];
-                }
-            }
-
-            int maxSum = 0;
+            long maxSum = 0;
             for (int i = 0; i <= M - H; i++) {
                 for (int j = 0; j <= N - W; j++) {
+                    long sum = 0;
 
-                    int sum = prefix[i + H][j + W] - prefix[i][j + W] - prefix[i + H][j] + prefix[i][j];
+                    for (int k = 0; k < W; k++) {
+                        sum += matrix[i][k + j];
+                        sum += matrix[i + H - 1][k + j];
+                    }
+
+                    for (int l = i + 1; l < i + H - 1; l++) {
+                        sum += matrix[l][j];
+                        sum += matrix[l][j + W - 1];
+                    }
 
                     if (sum > maxSum) {
                         maxSum = sum;
