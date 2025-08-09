@@ -86,6 +86,17 @@ public class LinkedList {
         current.next = current.next.next;
     }
 
+    public int calcuLenghLinkList() {
+        int length = 0;
+
+        Node current = head;
+        while (current != null) {
+            length++;
+            current = current.next;
+        }
+
+        return length;
+    }
 
     public void printList() {
         Node current = head;
